@@ -7,7 +7,7 @@ class CharactersPresenter(private val view: CharactersContract.View) : Character
         view.showLoading(false)
     }
 
-    override fun onClickCharacterDetail() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onClickCharacterDetail(name: String) {
+        view.showCharacterDetail(name)
     }
 }
