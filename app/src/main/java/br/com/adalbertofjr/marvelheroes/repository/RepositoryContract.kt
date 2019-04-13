@@ -4,5 +4,5 @@ import br.com.adalbertofjr.marvelheroes.characters.CharacterViewModel
 
 interface RepositoryContract {
 
-    fun getCharacters(): List<CharacterViewModel>
+    fun getCharacters(listener: Repository.OnRepositoryListener)
 }

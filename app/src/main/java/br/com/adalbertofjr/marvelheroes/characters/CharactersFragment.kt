@@ -11,7 +11,7 @@ import br.com.adalbertofjr.marvelheroes.detail.CharacterDetailActivity
 import br.com.adalbertofjr.marvelheroes.repository.Repository
 
 class CharactersFragment : ListFragment(), CharactersContract.View {
-    private val presenter: CharactersPresenter = CharactersPresenter(this, Repository())
+    private val presenter: CharactersPresenter = CharactersPresenter(this, Repository)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,7 +45,7 @@ class CharactersFragment : ListFragment(), CharactersContract.View {
         CharacterDetailActivity.open(requireContext(), character)
     }
 
-    override fun showMessage() {
+    override fun showMessage(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

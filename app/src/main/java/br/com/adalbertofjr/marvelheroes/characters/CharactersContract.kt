@@ -6,7 +6,7 @@ interface CharactersContract {
         fun showLoading(b: Boolean)
         fun showCharacters(characters: List<CharacterViewModel>)
         fun showCharacterDetail(character: CharacterViewModel)
-        fun showMessage()
+        fun showMessage(message: String)
     }
 
     interface Presenter {

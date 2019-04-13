@@ -4,11 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CharacterViewModel(
-    var name: String = ""
+    var name: String = "",
+    var description: String = "",
+    var thumbnail: String = ""
 ) : Parcelable {
 
-    constructor(parcel: Parcel) : this(parcel.readString()) {
-    }
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
 
     override fun toString(): String {
         return name
@@ -16,6 +21,8 @@ data class CharacterViewModel(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
+        parcel.writeString(description)
+        parcel.writeString(thumbnail)
     }
 
     override fun describeContents(): Int {
@@ -31,4 +38,5 @@ data class CharacterViewModel(
             return arrayOfNulls(size)
         }
     }
+
 }
