@@ -1,13 +1,18 @@
 package br.com.adalbertofjr.marvelheroes.characters
 
-class CharactersPresenter(private val view: CharactersContract.View) : CharactersContract.Presenter {
+import br.com.adalbertofjr.marvelheroes.repository.Repository
+
+class CharactersPresenter(
+    private val view: CharactersContract.View,
+    private val repository: Repository
+) : CharactersContract.Presenter {
     override fun loadCharacters() {
         view.showLoading(true)
-        view.showCharacters()
+        view.showCharacters(repository.getCharacters())
         view.showLoading(false)
     }
 
-    override fun onClickCharacterDetail(name: String) {
-        view.showCharacterDetail(name)
+    override fun onClickCharacterDetail(character: CharacterViewModel) {
+        view.showCharacterDetail(character)
     }
 }

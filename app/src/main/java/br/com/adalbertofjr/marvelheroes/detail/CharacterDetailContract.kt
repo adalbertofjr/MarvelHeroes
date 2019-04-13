@@ -1,12 +1,14 @@
 package br.com.adalbertofjr.marvelheroes.detail
 
+import br.com.adalbertofjr.marvelheroes.characters.CharacterViewModel
+
 interface CharacterDetailContract {
 
     interface View {
-        fun showCharacterData(name: String)
+        fun showCharacterData(character: CharacterViewModel)
     }
 
     interface Presenter {
-        fun loadDataCharacter(name: String)
+        fun loadDataCharacter(character: CharacterViewModel)
     }
 }

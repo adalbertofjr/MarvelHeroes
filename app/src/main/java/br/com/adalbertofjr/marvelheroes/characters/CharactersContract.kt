@@ -2,15 +2,15 @@ package br.com.adalbertofjr.marvelheroes.characters
 
 interface CharactersContract {
 
-    interface View{
+    interface View {
         fun showLoading(b: Boolean)
-        fun showCharacters()
-        fun showCharacterDetail(name: String)
+        fun showCharacters(characters: List<CharacterViewModel>)
+        fun showCharacterDetail(character: CharacterViewModel)
         fun showMessage()
     }
 
-    interface Presenter{
+    interface Presenter {
         fun loadCharacters()
-        fun onClickCharacterDetail(name: String)
+        fun onClickCharacterDetail(character: CharacterViewModel)
     }
 }
