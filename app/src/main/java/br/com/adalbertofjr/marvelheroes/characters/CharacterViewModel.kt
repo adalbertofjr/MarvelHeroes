@@ -6,10 +6,12 @@ import android.os.Parcelable
 data class CharacterViewModel(
     var name: String = "",
     var description: String = "",
-    var thumbnail: String = ""
+    var thumbnail: String = "",
+    var thumbnailLandscape: String = ""
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -23,6 +25,7 @@ data class CharacterViewModel(
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeString(thumbnail)
+        parcel.writeString(thumbnailLandscape)
     }
 
     override fun describeContents(): Int {

@@ -1,6 +1,5 @@
 package br.com.adalbertofjr.marvelheroes.characters
 
-import android.net.Uri
 import br.com.adalbertofjr.marvelheroes.data.api.model.Data
 import br.com.adalbertofjr.marvelheroes.repository.Repository
 
@@ -25,7 +24,8 @@ class CharactersPresenter(
                         CharacterViewModel(
                             it.name,
                             it.description,
-                            it.thumbnail.path.plus("/portrait_fantastic.${it.thumbnail.extension}")
+                            it.thumbnail.path.plus("/portrait_fantastic.${it.thumbnail.extension}"),
+                            it.thumbnail.path.plus("/landscape_incredible.${it.thumbnail.extension}")
                         )
                     )
                 }
