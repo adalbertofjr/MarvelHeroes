@@ -1,20 +1,27 @@
 package br.com.adalbertofjr.marvelheroes.characters
 
-import android.R
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import androidx.fragment.app.ListFragment
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import br.com.adalbertofjr.marvelheroes.R
 import br.com.adalbertofjr.marvelheroes.detail.CharacterDetailActivity
 import br.com.adalbertofjr.marvelheroes.repository.Repository
+import kotlinx.android.synthetic.main.fragment_cards.*
 
-class CharactersFragment : ListFragment(), CharactersContract.View {
+class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnCharacterListener {
+
     private val presenter: CharactersPresenter = CharactersPresenter(this, Repository)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_cards, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         presenter.loadCharacters()
     }
 
@@ -23,20 +30,13 @@ class CharactersFragment : ListFragment(), CharactersContract.View {
     }
 
     override fun showCharacters(characters: List<CharacterViewModel>) {
-        Log.i("MHAFJR", "showCharacters")
-        val adapter = ArrayAdapter<CharacterViewModel>(
-            requireContext(),
-            R.layout.simple_list_item_1, characters
-        )
-
-        listAdapter = adapter
+        val gridLayout = GridLayoutManager(requireContext(), 3)
+        rv_list_cards.setHasFixedSize(true)
+        rv_list_cards.layoutManager = gridLayout
+        rv_list_cards.adapter = CardsAdapter(requireContext(), characters, this)
     }
 
-    override fun onListItemClick(l: ListView?, v: View?, position: Int, id: Long) {
-        super.onListItemClick(l, v, position, id)
-        val character = l?.getItemAtPosition(position) as CharacterViewModel
-        Log.i("MHAFJR", "onListItemClick: ${character.name}")
-
+    override fun onCharacterSelected(character: CharacterViewModel) {
         presenter.onClickCharacterDetail(character)
     }
 
