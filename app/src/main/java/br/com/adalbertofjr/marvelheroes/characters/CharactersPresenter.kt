@@ -34,12 +34,12 @@ class CharactersPresenter(
                         }
                         offset+= result.size
                     }
-                    view.showCharacters(charactersViewModel )
+                    view.showCharacters(charactersViewModel)
+                    view.showLoading(false)
                 }
             },
             offset
         )
-        view.showLoading(false)
     }
 
     override fun onClickCharacterDetail(character: CharacterViewModel) {

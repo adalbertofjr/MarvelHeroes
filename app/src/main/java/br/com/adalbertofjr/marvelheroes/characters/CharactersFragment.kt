@@ -36,8 +36,13 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
         presenter.loadCharacters()
     }
 
-    override fun showLoading(b: Boolean) {
-        Log.i("MHAFJR", "showLoading: $b")
+    override fun showLoading(show: Boolean) {
+        Log.i("MHAFJR", "showLoading: $show")
+        if (show) {
+            pb_loading.visibility = View.VISIBLE
+            return
+        }
+        pb_loading.visibility = View.GONE
     }
 
     override fun showCharacters(characters: List<CharacterViewModel>) {
