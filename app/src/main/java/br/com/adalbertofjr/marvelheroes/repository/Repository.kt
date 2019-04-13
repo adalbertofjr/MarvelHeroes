@@ -12,11 +12,16 @@ import retrofit2.Response
 object Repository : RepositoryContract {
 
 
-    override fun getCharacters(listener: OnRepositoryListener) {
+    override fun getCharacters(listener: OnRepositoryListener, offset: Int) {
         val marvelApi = MarvelApiModule().provideMarvelApiService()
         val ts = HashUtil.getTs()
         val marvelApiCall =
-            marvelApi.getCharacters(ts, BuildConfig.PUBLIC_KEY_API_VALUE, HashUtil.generateHash(ts))
+            marvelApi.getCharacters(
+                ts,
+                BuildConfig.PUBLIC_KEY_API_VALUE,
+                HashUtil.generateHash(ts),
+                offset
+            )
 
         marvelApiCall.enqueue(object : Callback<Characters> {
             override fun onFailure(call: Call<Characters>, t: Throwable) {

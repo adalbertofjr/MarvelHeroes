@@ -7,31 +7,38 @@ class CharactersPresenter(
     private val view: CharactersContract.View,
     private val repository: Repository
 ) : CharactersContract.Presenter {
+    var offset: Int = 0
 
     override fun loadCharacters() {
         view.showLoading(true)
-        repository.getCharacters(object : Repository.OnRepositoryListener {
-            override fun onFailure(message: String) {
-                view.showLoading(false)
-                view.showMessage(message)
-            }
-
-            override fun onResponse(charactersData: Data?) {
-                var charactersViewModel = mutableListOf<CharacterViewModel>()
-                val result = charactersData?.results
-                result?.forEach { it ->
-                    charactersViewModel.add(
-                        CharacterViewModel(
-                            it.name,
-                            it.description,
-                            it.thumbnail.path.plus("/portrait_fantastic.${it.thumbnail.extension}"),
-                            it.thumbnail.path.plus("/landscape_incredible.${it.thumbnail.extension}")
-                        )
-                    )
+        repository.getCharacters(
+            object : Repository.OnRepositoryListener {
+                override fun onFailure(message: String) {
+                    view.showLoading(false)
+                    view.showMessage(message)
                 }
-                view.showCharacters(charactersViewModel)
-            }
-        })
+
+                override fun onResponse(charactersData: Data?) {
+                    var charactersViewModel = mutableListOf<CharacterViewModel>()
+                    val result = charactersData?.results
+                    if (result != null) {
+                        result?.forEach { it ->
+                            charactersViewModel.add(
+                                CharacterViewModel(
+                                    it.name,
+                                    it.description,
+                                    it.thumbnail.path.plus("/portrait_fantastic.${it.thumbnail.extension}"),
+                                    it.thumbnail.path.plus("/landscape_incredible.${it.thumbnail.extension}")
+                                )
+                            )
+                        }
+                        offset+= result.size
+                    }
+                    view.showCharacters(charactersViewModel )
+                }
+            },
+            offset
+        )
         view.showLoading(false)
     }
 

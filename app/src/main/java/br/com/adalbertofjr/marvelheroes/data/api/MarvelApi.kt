@@ -10,6 +10,7 @@ interface MarvelApi {
     fun getCharacters(
         @Query("ts") ts: Long,
         @Query("apikey") apiKey: String,
-        @Query("hash") hash: String
+        @Query("hash") hash: String,
+        @Query("offset") offset : Int
     ): Call<Characters>
 }
