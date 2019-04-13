@@ -31,4 +31,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+
+    //rest interactions
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    //JSON Parsing
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    //http logging
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 }
