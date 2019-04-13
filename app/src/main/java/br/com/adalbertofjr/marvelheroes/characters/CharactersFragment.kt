@@ -46,6 +46,6 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
     }
 
     override fun showMessage(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.i("MHAFJR", "showMessage: ${message}")
     }
 }
