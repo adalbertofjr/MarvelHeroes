@@ -2,7 +2,7 @@
 
 Aplicativo para consulta de informaçãoe dos personagens da Marvel Comics.
 
-####Configurar:
+#### Configurar:
 
 Para usar este projeto você precisa:
 - Cadastro no site https://developer.marvel.com​
@@ -17,7 +17,7 @@ PRIVATE_KEY_API="sua_chave_privada_aqui"
  
 Caso não tenha o arquivo crie um na pasta raiz do projeto.
     
-####O que usei:
+#### O que usei:
 - Kotlin
 - MVP
 - Api: ​https://developer.marvel.com​ 
