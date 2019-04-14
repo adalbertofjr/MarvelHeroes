@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#b40000</color>
     <color name="colorAccent">#f0141e</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="cardStripe">#60FFFFFF</color>
 </resources>

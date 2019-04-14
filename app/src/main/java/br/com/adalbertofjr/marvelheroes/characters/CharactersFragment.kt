@@ -1,5 +1,7 @@
 package br.com.adalbertofjr.marvelheroes.characters
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +21,7 @@ import javax.inject.Inject
 class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnCharacterListener {
     private val characters = mutableListOf<CharacterViewModel>()
     private lateinit var gridLayout: GridLayoutManager
+    private val connectivityManager by lazy { requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
     private var isScrolling = false
 
     //Inject
@@ -50,8 +53,11 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
         rv_list_cards.layoutManager = gridLayout
         rv_list_cards.adapter = CardsAdapter(requireContext(), this.characters, this)
         rv_list_cards.addOnScrollListener(this.onScrollListener())
+        btn_update.setOnClickListener {
+            presenter.loadCharacters(connectivityManager)
+        }
 
-        presenter.loadCharacters()
+        presenter.loadCharacters(connectivityManager)
     }
 
     override fun showLoading(show: Boolean) {
@@ -81,6 +87,16 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
         Log.i("MHAFJR", "showMessage: ${message}")
     }
 
+    override fun showErrorConnection(isConnected: Boolean) {
+        if (isConnected) {
+            rv_list_cards.visibility = View.VISIBLE
+            container_no_connection.visibility = View.GONE
+            return
+        }
+        rv_list_cards.visibility = View.GONE
+        container_no_connection.visibility = View.VISIBLE
+    }
+
     /**
      * Endless Scroll
      */
@@ -101,7 +117,7 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
                 if (isScrolling && currentCharacters + scrollOutItems == totalCharacters && dy > 0) {
                     isScrolling = false
 
-                    presenter.loadCharacters()
+                    presenter.loadCharacters(connectivityManager)
                 }
             }
 
