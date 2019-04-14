@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".characters.CharactersActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +27,7 @@
 
         <activity
             android:name=".detail.CharacterDetailActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".characters.CharactersActivity" />
     </application>
 
