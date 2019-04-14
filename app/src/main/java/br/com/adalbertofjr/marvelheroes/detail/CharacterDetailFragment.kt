@@ -9,6 +9,7 @@ import br.com.adalbertofjr.marvelheroes.R
 import br.com.adalbertofjr.marvelheroes.characters.CharacterViewModel
 import br.com.adalbertofjr.marvelheroes.detail.injection.CharacterDetailModule
 import br.com.adalbertofjr.marvelheroes.root.App
+import br.com.adalbertofjr.marvelheroes.util.textOrUseThis
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail.*
 import javax.inject.Inject
@@ -46,8 +47,7 @@ class CharacterDetailFragment : Fragment(), CharacterDetailContract.View {
         Glide.with(this).load(character.thumbnailLandscape).into(imv_character)
         Glide.with(this).load(character.thumbnail).into(imv_card)
         txv_name.text = character.name
-        txv_description.text =
-            if (character.description.isNotEmpty()) character.description else getString(R.string.message_no_description)
+        txv_description.text  = character.description.textOrUseThis(message = getString(R.string.message_no_description))
     }
 
     companion object {
