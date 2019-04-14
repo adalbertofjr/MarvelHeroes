@@ -11,22 +11,21 @@ import br.com.adalbertofjr.marvelheroes.characters.CharacterViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class CharacterDetailActivity : AppCompatActivity(), CharacterDetailContract.View {
-    val character by lazy { intent.getParcelableExtra(EXTRA_CHARACTER) as CharacterViewModel }
-    val presenter: CharacterDetailPresenter = CharacterDetailPresenter(this)
+class CharacterDetailActivity : AppCompatActivity() {
+    private val character by lazy { intent.getParcelableExtra(EXTRA_CHARACTER) as CharacterViewModel }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        presenter.loadDataCharacter(character)
+        showHotelDetailsFragment()
     }
 
-    override fun showCharacterData(character: CharacterViewModel) {
-        Glide.with(this).load(character.thumbnailLandscape).into(imv_character)
-        Glide.with(this).load(character.thumbnail).into(imv_card)
-        txv_name.text = character.name
-        txv_description.text =
-            if (!character.description.isNullOrEmpty()) character.description else "Macacos me mordam Batman!\n\nParece que alguém esqueceu de escrever minha descrição."
+    private fun showHotelDetailsFragment() {
+        val fragment = CharacterDetailFragment.newInstance(character)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.details, fragment, CharacterDetailFragment.TAG_DETAILS)
+            .commit()
     }
 
     companion object {
