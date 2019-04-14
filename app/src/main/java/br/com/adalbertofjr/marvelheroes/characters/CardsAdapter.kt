@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.adalbertofjr.marvelheroes.R
 import com.bumptech.glide.Glide
@@ -31,8 +33,8 @@ class CardsAdapter(val context: Context, val characters: List<CharacterViewModel
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtName = itemView.txv_name
-        val imvCharacter = itemView.imv_thumbnail
+        val txtName: TextView = itemView.txv_name
+        val imvCharacter: ImageView = itemView.imv_thumbnail
     }
 
     interface OnCharacterListener {

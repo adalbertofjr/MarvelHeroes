@@ -7,7 +7,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MarvelApiModule {
-    val BASE_URL = "http://gateway.marvel.com/"
 
     fun provideClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
@@ -26,5 +25,9 @@ class MarvelApiModule {
 
     fun provideMarvelApiService(): MarvelApi {
         return provideRetrofit(BASE_URL, provideClient()).create(MarvelApi::class.java)
+    }
+
+    companion object {
+        private const val BASE_URL = "http://gateway.marvel.com/"
     }
 }

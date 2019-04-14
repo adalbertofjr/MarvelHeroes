@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Marvel Heroes</string>
+
+    <!--Text-->
+    <string name="update">Atualizar</string>
+    <string name="marvel">MARVEL</string>
+
+    <!--Messages-->
+    <string name="message_error_connection">Forças do mal estão impedindo que nossa conexão de internet funcione!</string>
+    <string name="message_no_description">"Macacos me mordam Batman!\n\nParece que alguém esqueceu de escrever minha descrição."</string>
+
+    <!--Description-->
+    <string name="description_image_character">imagem do personagem</string>
+    <string name="decription_marvel_comics">imagem marvel comics</string>
 </resources>

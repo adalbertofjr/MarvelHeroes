@@ -47,7 +47,7 @@ class CharacterDetailFragment : Fragment(), CharacterDetailContract.View {
         Glide.with(this).load(character.thumbnail).into(imv_card)
         txv_name.text = character.name
         txv_description.text =
-            if (!character.description.isNullOrEmpty()) character.description else "Macacos me mordam Batman!\n\nParece que alguém esqueceu de escrever minha descrição."
+            if (character.description.isNotEmpty()) character.description else getString(R.string.message_no_description)
     }
 
     companion object {

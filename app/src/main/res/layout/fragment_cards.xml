@@ -49,14 +49,14 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txv_message_error_connection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="16dp"
-            android:text="Forças do mal estão impedindo que nossa conexão de internet funcione!"
+            android:text="@string/message_error_connection"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -77,12 +77,12 @@
             android:layout_marginEnd="8dp"
             android:background="@color/black"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="Atualizar"
+            android:text="@string/update"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/txv_message_error_connection" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -84,7 +84,7 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
     }
 
     override fun showMessage(message: String) {
-        Log.i("MHAFJR", "showMessage: ${message}")
+        Log.i("MHAFJR", "showMessage: $message")
     }
 
     override fun showErrorConnection(isConnected: Boolean) {

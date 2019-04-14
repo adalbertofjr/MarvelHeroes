@@ -16,7 +16,7 @@ class HashUtil {
             val md5: MessageDigest
             return try {
                 md5 = MessageDigest.getInstance("MD5")
-                val bytes = md5.digest(rawHash!!.toByteArray())
+                val bytes = md5.digest(rawHash.toByteArray())
                 bytesToHex(bytes)
             } catch (e: NoSuchAlgorithmException) {
                 ""
