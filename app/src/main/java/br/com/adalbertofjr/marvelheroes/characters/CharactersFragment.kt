@@ -23,11 +23,13 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
 
     //Inject
     val Fragment.app: App get() = requireActivity().application as App
-    val component by lazy { app.component.inject(
-        CharactersModule(
-            this
+    val component by lazy {
+        app.component.inject(
+            CharactersModule(
+                this
+            )
         )
-    ) }
+    }
 
     @Inject
     lateinit var presenter: CharactersPresenter

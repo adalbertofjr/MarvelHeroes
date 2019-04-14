@@ -40,6 +40,7 @@ dependencies {
     //Rest interactions
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
+
     //JSON Parsing
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation 'com.google.code.gson:gson:2.8.2'
@@ -54,4 +55,11 @@ dependencies {
     //injection
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //RxKotlin
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
 }

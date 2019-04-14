@@ -1,7 +1,9 @@
 package br.com.adalbertofjr.marvelheroes.characters
 
-import br.com.adalbertofjr.marvelheroes.data.api.model.Data
 import br.com.adalbertofjr.marvelheroes.repository.Repository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 
 class CharactersPresenter(
     private val view: CharactersContract.View,
@@ -9,37 +11,35 @@ class CharactersPresenter(
 ) : CharactersContract.Presenter {
     var offset: Int = 0
 
-    override fun loadCharacters() {
-        view.showLoading(true)
-        repository.getCharacters(
-            object : Repository.OnRepositoryListener {
-                override fun onFailure(message: String) {
-                    view.showLoading(false)
-                    view.showMessage(message)
-                }
 
-                override fun onResponse(charactersData: Data?) {
-                    var charactersViewModel = mutableListOf<CharacterViewModel>()
-                    val result = charactersData?.results
-                    if (result != null) {
-                        result?.forEach { it ->
-                            charactersViewModel.add(
-                                CharacterViewModel(
-                                    it.name,
-                                    it.description,
-                                    it.thumbnail.path.plus("/portrait_fantastic.${it.thumbnail.extension}"),
-                                    it.thumbnail.path.plus("/landscape_incredible.${it.thumbnail.extension}")
-                                )
+    override fun loadCharacters() {
+        var charactersViewModel = mutableListOf<CharacterViewModel>()
+        view.showLoading(true)
+        repository.getCharacters(offset)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { results ->
+                    for (result in results) {
+                        charactersViewModel.add(
+                            CharacterViewModel(
+                                result.name,
+                                result.description,
+                                result.thumbnail.path.plus("/portrait_fantastic.${result.thumbnail.extension}"),
+                                result.thumbnail.path.plus("/landscape_incredible.${result.thumbnail.extension}")
                             )
-                        }
-                        offset+= result.size
+                        )
                     }
+                    offset += results.size
+                },
+                { e ->
+                    e.printStackTrace()
+                    view.showLoading(false)},
+                {
                     view.showCharacters(charactersViewModel)
                     view.showLoading(false)
                 }
-            },
-            offset
-        )
+            )
     }
 
     override fun onClickCharacterDetail(character: CharacterViewModel) {

@@ -1,7 +1,7 @@
 package br.com.adalbertofjr.marvelheroes.data.api
 
 import br.com.adalbertofjr.marvelheroes.data.api.model.Characters
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +12,5 @@ interface MarvelApi {
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String,
         @Query("offset") offset : Int
-    ): Call<Characters>
+    ): Observable<Characters>
 }
