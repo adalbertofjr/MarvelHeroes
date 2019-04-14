@@ -10,16 +10,32 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.adalbertofjr.marvelheroes.R
+import br.com.adalbertofjr.marvelheroes.characters.injection.CharactersModule
 import br.com.adalbertofjr.marvelheroes.detail.CharacterDetailActivity
-import br.com.adalbertofjr.marvelheroes.repository.Repository
+import br.com.adalbertofjr.marvelheroes.root.App
 import kotlinx.android.synthetic.main.fragment_cards.*
+import javax.inject.Inject
 
 class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnCharacterListener {
-
-    private val presenter: CharactersPresenter = CharactersPresenter(this, Repository)
     private val characters = mutableListOf<CharacterViewModel>()
     private lateinit var gridLayout: GridLayoutManager
     private var isScrolling = false
+
+    //Inject Module
+    val Fragment.app: App get() = requireActivity().application as App
+    val component by lazy { app.component.inject(
+        CharactersModule(
+            this
+        )
+    ) }
+
+    @Inject
+    lateinit var presenter: CharactersPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_cards, container, false)
