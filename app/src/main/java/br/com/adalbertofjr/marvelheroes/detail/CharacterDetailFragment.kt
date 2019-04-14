@@ -7,11 +7,30 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.adalbertofjr.marvelheroes.R
 import br.com.adalbertofjr.marvelheroes.characters.CharacterViewModel
+import br.com.adalbertofjr.marvelheroes.detail.injection.CharacterDetailModule
+import br.com.adalbertofjr.marvelheroes.root.App
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail.*
+import javax.inject.Inject
 
 class CharacterDetailFragment : Fragment(), CharacterDetailContract.View {
-    private var presenter = CharacterDetailPresenter(this)
+    //Inject
+    val Fragment.app: App get() = requireActivity().application as App
+    val component by lazy {
+        app.component.inject(
+            CharacterDetailModule(
+                this
+            )
+        )
+    }
+
+    @Inject
+    lateinit var presenter: CharacterDetailPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_detail, container, false)

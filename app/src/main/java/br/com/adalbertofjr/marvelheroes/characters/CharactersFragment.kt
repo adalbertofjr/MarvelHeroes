@@ -21,7 +21,7 @@ class CharactersFragment : Fragment(), CharactersContract.View, CardsAdapter.OnC
     private lateinit var gridLayout: GridLayoutManager
     private var isScrolling = false
 
-    //Inject Module
+    //Inject
     val Fragment.app: App get() = requireActivity().application as App
     val component by lazy { app.component.inject(
         CharactersModule(
